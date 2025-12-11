@@ -20,8 +20,15 @@ node {
             app.push("${env.BUILD_NUMBER}")
         }
     }
-    
+
     stage('Trigger ManifestUpdate') {
-        build job: 'updatemanifestjui', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+        when {
+            branch 'main'
+        }
+        steps {
+            build job: 'updatemanifestjui', parameters: [
+                string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)
+            ]
+        }
     }
 }
