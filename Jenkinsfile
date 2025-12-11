@@ -22,13 +22,8 @@ node {
     }
 
     stage('Trigger ManifestUpdate') {
-        when {
-            branch 'main'
-        }
-        steps {
-            build job: 'updatemanifestjui', parameters: [
-                string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)
-            ]
-        }
+        build job: 'updatemanifestjui', parameters: [
+            string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)
+        ]
     }
 }
